@@ -75,10 +75,6 @@ class Data:
 
         return sorted(list(map(fun, rows)), key=lambda x: x['dist'])
 
-    def furthest(self,row1,rows=None,cols=None):
-        t=self.around(row1,rows,cols)
-        return t[-1]
-
     def half(self, rows=None, cols=None, above=None):
         if not rows:
             rows = self.rows
@@ -87,7 +83,7 @@ class Data:
         A = above
         if not above:
             A = any(some, self.the['seed'])
-        B = self.furthest(A,rows)["row"]
+        B = self.furthest(A, rows)["row"]
 
         def dist(row1, row2):
             return self.dist(row1, row2, cols)
