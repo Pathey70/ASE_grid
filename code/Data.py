@@ -133,3 +133,6 @@ class Data:
             node['right'] = self.cluster(right, min, cols, node['B'])
 
         return node
+
+    def furthest(self, row1, rows=None, cols=None):
+        return self.around(row1, rows, cols)[-1]
