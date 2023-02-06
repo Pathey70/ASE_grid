@@ -77,3 +77,11 @@ def show(node, what, cols, nPlaces, lvl=0):
             print("")
         show(None if "left" not in node else node["left"], what, cols, nPlaces, lvl + 1)
         show(None if "right" not in node else node["right"], what, cols, nPlaces, lvl + 1)
+
+
+def transpose(t):
+    u = [[None] * len(t) for _ in range(len(t[0]))]
+    for r, row in enumerate(t):
+        for c, val in enumerate(row):
+            u[c][r] = val
+    return u
