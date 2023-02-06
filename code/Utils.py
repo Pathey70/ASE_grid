@@ -2,6 +2,7 @@ import math
 from Main import coerce
 import os
 import random
+import json,re, copy
 
 
 def rnd(n, nPlaces=3):
@@ -77,3 +78,40 @@ def show(node, what, cols, nPlaces, lvl=0):
             print("")
         show(None if "left" not in node else node["left"], what, cols, nPlaces, lvl + 1)
         show(None if "right" not in node else node["right"], what, cols, nPlaces, lvl + 1)
+
+def dofile(src):
+    json_string = '{'
+    if not os.path.isfile(src):
+        print("\nfile " + src + " doesn't exists!")
+        sys.exit(2)
+    with open(src, 'r') as file1:
+        next(file1)
+        next(file1)
+        for line in file1:
+            x = line.replace('_','"_"').replace('=',':').replace('{','[').replace('}',']').replace('\'','"')
+            json_string = json_string+x
+    json_string = json_string[:-2] + '}'
+    json_string = re.sub('(\w+):',r'"\1":',json_string)
+    return json.loads(json_string)
+def oo(t):
+    td = t.__dict__
+    td['a'] = t.__class__.__name__
+    td['id'] = id(t)
+    print(dict(sorted(td.items())))
+
+def helper(k):
+    return "Num" + str(k)
+
+def repcols(cols, Data):
+    cols = copy.deepcopy(cols)
+    for col in cols:
+        col[len(col)-1] = str(col[0]) + ':' + str(col[len(col)-1])
+        for j in range(1,len(col)):
+            col[j-1] = col[j]
+    col.pop()
+    cols.insert(0,[helper(i) for i in range(len(cols[0])-1)])
+    cols[0][len(cols[0])-1] = "thingX"
+    return Data(cols)
+
+
+
