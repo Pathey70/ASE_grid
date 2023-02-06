@@ -10,7 +10,7 @@ class Data:
     """Container for ROWs, summarized into NUM or SYM columns"""
 
     def __init__(self, src={}, the=None):
-        self.rows = list()
+        self.rows = []
         self.cols = None
         self.the = the
         if type(src) == str:
@@ -79,10 +79,10 @@ class Data:
         if not rows:
             rows = self.rows
 
-        some = many(rows, self.the["Sample"], self.the['seed'])
+        #some = many(rows, self.the["Sample"], self.the['seed'])
         A = above
         if not above:
-            A = any(some, self.the['seed'])
+            A = any(rows, self.the['seed'])
         B = self.furthest(A, rows)["row"]
 
         def dist(row1, row2):
@@ -93,10 +93,15 @@ class Data:
         right = []
 
         def project(row):
-            return {"row": row, "dist": cosine(dist(row, A), dist(row, B), c)}
+            x,y=cosine(dist(row, A), dist(row, B), c)
+            if x not in dir(row):
+                row.x=x
+            if y not in dir(row):
+                row.y=y
+            return {"row": row, "x":x, "y":y }
 
-        for n, tmp in enumerate(sorted(list(map(project, rows)), key=lambda x: x["dist"])):
-            if n <= len(rows) // 2:
+        for n, tmp in enumerate(sorted(list(map(project, rows)), key=lambda x: x["x"])):
+            if n < len(rows) // 2:
                 left.append(tmp["row"])
                 mid = tmp["row"]
             else:
@@ -118,19 +123,18 @@ class Data:
             node["left"] = self.sway(left, min, cols, node["A"])
         return node
 
-    def cluster(self, rows=None, min=None, cols=None, above=None):
+    def cluster(self, rows=None, cols=None, above=None):
         if not rows:
             rows = self.rows
-        if not min:
-            min = len(rows) ** self.the["min"]
         if not cols:
             cols = self.cols.x
 
         node = {"data": self.clone(rows)}
-        if len(rows) > 2 * min:
-            left, right, node["A"], node["B"], node["mid"], _ = self.half(rows, cols, above)
-            node['left'] = self.cluster(left, min, cols, node['A'])
-            node['right'] = self.cluster(right, min, cols, node['B'])
+
+        if len(rows) >= 2:
+            left, right, node["A"], node["B"], node["mid"], node["C"] = self.half(rows, cols, above)
+            node['left'] = self.cluster(left, cols, node['A'])
+            node['right'] = self.cluster(right, cols, node['B'])
 
         return node
 

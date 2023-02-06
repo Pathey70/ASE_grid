@@ -68,14 +68,14 @@ def any(t, seed=937162211):
     return random.choices(t)[0]
 
 
-def show(node, what, cols, nPlaces, lvl=0):
+def show(node, what=None, cols=None, nPlaces=None, lvl=0):
     if node:
-        print("| " * lvl + str(len(node["data"].rows)) + " ", end='')
+        print("|.. " * lvl + " ", end='')
         # print(node)
-        if "left" not in node or lvl == 0:
-            print(node["data"].stats(nPlaces, node["data"].cols.y, "mid"))
+        if "left" not in node:
+            print(node["data"].rows[-1].cells[-1])
         else:
-            print("")
+            print(int(rnd(100*node['C'])))
         show(None if "left" not in node else node["left"], what, cols, nPlaces, lvl + 1)
         show(None if "right" not in node else node["right"], what, cols, nPlaces, lvl + 1)
 
@@ -103,7 +103,7 @@ def oo(t):
 def helper(k):
     return "Num" + str(k)
 
-def repcols(cols, Data):
+def repcols(cols, Data, the):
     cols = copy.deepcopy(cols)
     for col in cols:
         col[len(col)-1] = str(col[0]) + ':' + str(col[len(col)-1])
@@ -112,7 +112,7 @@ def repcols(cols, Data):
     col.pop()
     cols.insert(0,[helper(i) for i in range(len(cols[0])-1)])
     cols[0][len(cols[0])-1] = "thingX"
-    return Data(cols)
+    return Data(cols,the)
 
 def transpose(t):
     u = [[None] * len(t) for _ in range(len(t[0]))]

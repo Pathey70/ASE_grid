@@ -35,7 +35,10 @@ def eg_the(the):
     pass
 
 def eg_repcols(the):
-    t = repcols(dofile(the["file"])['cols'],Data)
+    t = repcols(dofile(the["file"])['cols'],Data,the)
     a = list(map(oo,t.cols.all))
     b = list(map(oo,t.rows))
     pass
+
+def eg_synonyms(the):
+    show(repcols(dofile(the["file"])['cols'],Data,the).cluster())
