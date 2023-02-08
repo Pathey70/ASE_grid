@@ -136,7 +136,7 @@ def repRows(t, rows, Data, the):
         if n == 0:
             row.append("thingX")
         else:
-            u = t['rows'][-n + 1]
+            u = t['rows'][len(t['rows'])-n]
             row.append(u[-1])
 
     return Data(rows, the)
@@ -144,16 +144,23 @@ def repRows(t, rows, Data, the):
 
 def repPlace(data):
     n = 20
-    g = [[''] * n for _ in range(n)]
+    g = {}
+    for i in range(1,n+1):
+        g[i] = {}
+        for j in range(1,n+1):
+            g[i][j] = ' '
     maxy = 0
     print('')
     for r, row in enumerate(data.rows):
         c = chr(64+r+1)
         print(c, row.cells[-1])
         x, y = int(row.x * n), int(row.y * n)
-        maxy = max(maxy, y)
-        g[y][x] = c
+        maxy = max(maxy, y+1)
+        g[y+1][x+1] = c
     print('')
-    for y in range(0, maxy):
-        oo(g[y])
+    for y in range(1, maxy+1):
+        print('{',end=" ")
+        for i in g[y].values():
+            print(i,end=" ")
+        print('}')
 

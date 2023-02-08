@@ -94,10 +94,12 @@ class Data:
 
         def project(row):
             x,y=cosine(dist(row, A), dist(row, B), c)
-            if x not in dir(row):
-                row.x=x
-            if y not in dir(row):
-                row.y=y
+            if 'x' not in dir(row):
+                row.x = x
+                row.y = y
+            else:
+                row.x = row.x
+                row.y = row.y
             return {"row": row, "x":x, "y":y }
 
         for n, tmp in enumerate(sorted(list(map(project, rows)), key=lambda x: x["x"])):
