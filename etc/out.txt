@@ -1,5 +1,6 @@
 ✅PASS : eg_check_nums
 ✅PASS : eg_check_syms
+✅PASS : eg_position
 ✅PASS : eg_repcols
 ✅PASS : eg_reprows
 ✅PASS : eg_synonyms

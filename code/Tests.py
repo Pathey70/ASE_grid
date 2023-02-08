@@ -4,7 +4,7 @@ import TestEngine
 from Sym import Sym
 from Num import Num
 from Data import Data
-from Utils import rnd, csv, rand, show, dofile, repcols, oo, repRows, transpose
+from Utils import rnd, csv, rand, show, dofile, repcols, oo, repRows, transpose, repPlace
 
 tot = 0
 
@@ -52,3 +52,11 @@ def eg_reprows(the):
 
 def eg_synonyms(the):
     show(repcols(dofile(the["file"])['cols'], Data, the).cluster())
+
+
+def eg_position(the):
+    t = dofile(the['file'])
+    rows = repRows(t, transpose(t['cols']), Data, the)
+    rows.cluster()
+    repPlace(rows)
+    pass
