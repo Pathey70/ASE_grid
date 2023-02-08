@@ -60,3 +60,10 @@ def eg_position(the):
     rows.cluster()
     repPlace(rows)
     pass
+
+
+def eg_prototype(the):
+    t = dofile(the['file'])
+    rows = repRows(t, transpose(t['cols']), Data, the)
+    show(rows.cluster())
+    pass
