@@ -4,7 +4,7 @@ import TestEngine
 from Sym import Sym
 from Num import Num
 from Data import Data
-from Utils import rnd, csv, rand, show, dofile, repcols, oo, repRows, transpose, repPlace
+from Utils import rnd, csv, rand, show, dofile, repcols, oo, repRows, transpose, repPlace, repgrid
 
 tot = 0
 
@@ -74,4 +74,8 @@ def eg_copy(the):
     t2=copy.deepcopy(t1)
     t2["b"]["d"][0]=10000
     print("b4",t1,"\nafter",t2)  
+    pass
+
+def eg_every(the):
+    repgrid(the['file'],the,Data)
     pass

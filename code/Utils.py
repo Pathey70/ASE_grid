@@ -163,4 +163,12 @@ def repPlace(data):
         for i in g[y].values():
             print(i,end=" ")
         print('}')
+        
+def repgrid(sFile,the,Data,t=None,rows=None,cols=None):
+    t=dofile(sFile)
+    rows=repRows(t,transpose(t['cols']),Data,the)
+    cols=repcols(t['cols'],Data,the)
+    show(rows.cluster())
+    show(cols.cluster())
+    repPlace(rows)
 
