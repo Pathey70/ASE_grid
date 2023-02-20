@@ -1,0 +1,22 @@
+local _ = " "
+return {
+ domain="Best Batsman",
+ cols={   {'Record against Spin(Good)', 5, 4, 3, 4, 2, 2, 4, 2, 4, 3, 'Record against Spin(Poor)'},
+               {'Running Between Wicktets(Good)', 4, 5, 5, 3, 4, 4, 1, 3, 3, 4, 'Running Between Wicktets(Poor)'},
+  {'Bondary %(High)', 2, 3, 3, 2, 2, 3, 4, 2, 2, 5, 'Bondary %(Low)'},
+       {'Centuries (High)' , 5, 4, 2, 3, 3, 2, 3, 1, 3, 2, 'Centuries (Low)'},
+{'Ducks (High)', 3, 1, 1, 2, 1, 2, 2, 5, 2, 1, 'Ducks (Low)'},
+      {'Record against Pace(Good)', 5, 4, 3, 3, 4, 4, 3, 2, 3, 3, 'Record against Pace(Poor)'},
+       {'Record against Swing(Good)', 4, 3, 2, 3, 4, 3, 2, 1, 2, 4, 'Record against Swing(Poor)'},
+      {'Nervous ninties(High)', 4, 2, 1, 1, 2, 2, 2, 3, 2, 3, 'Nervous ninties(Low'}},
+rows={                      { _, _, _, _, _, _, _, _, _, 'Ben Stocks'},
+                            { _, _, _, _, _, _, _, _, 'Babar Azam'},
+                            { _, _, _, _, _, _, _, 'KL Rahul'},
+                            { _, _, _, _, _, _, 'Rohit Sharma'},
+                            { _, _, _, _, _,  'David Warner'},
+                            { _, _, _, _,  'Steve Smith'},
+                            { _, _, _,  'Kane Williamson'},
+                            { _, _,  'MS Dhoni'},
+                            { _, 'Virat Kohli'},
+                            {'Sachin Tendulkar'}}
+}
