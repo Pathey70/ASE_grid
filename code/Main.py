@@ -45,10 +45,14 @@ def update(opts, t):
     for opt, arg in opts:
         if opt in ("-d", "--dump"):
             t['dump'] = coerce(arg)
+        if opt in ("-f", "--file"):
+            t['file'] = coerce(arg)
         if opt in ("-g", "--go"):
             t['go'] = coerce(arg)
         if opt in ("-h", "--help"):
             t['help'] = coerce(arg)
+        if opt in ("-p", "--p"):
+            t['p'] = coerce(arg)
         if opt in ("-s", "--seed"):
             t['seed'] = coerce(arg)
     return t
@@ -61,7 +65,7 @@ if __name__ == "__main__":
     get_default()
     argv = sys.argv[1:]
     try:
-        opts, args = getopt.getopt(argv, ":dghs", ["dump=", "go=", "help=", "seed="])
+        opts, args = getopt.getopt(argv, ":dfghps", ["dump=", "file=", "go=", "help=", "p=", "seed="])
     except getopt.GetoptError:
         print('Please provide appropriate arguments')
         sys.exit(2)
